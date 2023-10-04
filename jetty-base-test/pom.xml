@@ -21,7 +21,55 @@
         <version>3.6.0</version>
         <executions>
           <execution>
-            <id>copy-webapp-A</id>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <artifactId>webapp-A</artifactId>
+                  <destFileName>webapp-A.war</destFileName>
+                  <groupId>org.eclipse.demo</groupId>
+                  <outputDirectory>webapps-late/</outputDirectory>
+                  <overWrite>true</overWrite>
+                  <type>war</type>
+                  <version>${project.version}</version>
+                </artifactItem>
+                <artifactItem>
+                  <artifactId>webapp-B</artifactId>
+                  <destFileName>webapp-B.war</destFileName>
+                  <groupId>org.eclipse.demo</groupId>
+                  <outputDirectory>webapps-late/</outputDirectory>
+                  <overWrite>true</overWrite>
+                  <type>war</type>
+                  <version>${project.version}</version>
+                </artifactItem>
+                <artifactItem>
+                  <artifactId>jetty-late-deploy</artifactId>
+                  <groupId>org.eclipse.jetty</groupId>
+                  <outputDirectory>lib/</outputDirectory>
+                  <overWrite>true</overWrite>
+                  <version>${project.version}</version>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <id>copy</id>
+            <phase>generate-resources</phase>
+          </execution>
+          <execution>
+            <configuration>
+              <classifier>config</classifier>
+              <excludes>META-INF/**,webapps/**,start.d/**,start.ini</excludes>
+              <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
+              <includeArtifactIds>jetty-late-deploy</includeArtifactIds>
+              <includeGroupIds>org.eclipse.jetty</includeGroupIds>
+              <outputDirectory>${project.basedir}</outputDirectory>
+            </configuration>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <id>unpack-config-deps</id>
+            <phase>generate-resources</phase>
           </execution>
         </executions>
       </plugin>
@@ -40,6 +88,11 @@
       <artifactId>webapp-B</artifactId>
       <version>${project.version}</version>
       <type>war</type>
+    </dependency>
+    <dependency>
+      <artifactId>jetty-late-deploy</artifactId>
+      <groupId>org.eclipse.jetty</groupId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 
