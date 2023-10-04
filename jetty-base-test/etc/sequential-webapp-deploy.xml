@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "https://www.eclipse.org/jetty/configure_10_0.dtd">
+
+<Configure id="Contexts" class="org.eclipse.jetty.server.handler.ContextHandlerCollection">
+  <!--<Ref refid="Server">
+    <Call name="dumpStdErr"/>
+  </Ref>-->
+
+  <Call name="addHandler">
+    <Arg>
+      <New id="webappA" class="org.eclipse.jetty.webapp.WebAppContext">
+        <Set name="war"><Property name="jetty.base"/>/webapps-sequential/webapp-A.war</Set>
+        <Set name="contextPath">/appA</Set>
+      </New>
+    </Arg>
+  </Call>
+  <Call name="addHandler">
+    <Arg>
+      <New id="webappB" class="org.eclipse.jetty.webapp.WebAppContext">
+        <Set name="war"><Property name="jetty.base"/>/webapps-sequential/webapp-B.war</Set>
+        <Set name="contextPath">/appB</Set>
+      </New>
+    </Arg>
+  </Call>
+</Configure>
