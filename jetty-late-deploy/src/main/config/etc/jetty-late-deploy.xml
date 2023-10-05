@@ -5,7 +5,6 @@
   <Call name="addEventListener">
     <Arg>
       <New class="org.eclipse.jetty.deploy.late.LateDeployListener" id="LateDeployer">
-        <Set name="contexts"><Ref refid="Contexts"/></Set>
         <Set name="webappsLatePathString"><Property name="jetty.base"/>/webapps-late/</Set>
       </New>
     </Arg>
