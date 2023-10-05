@@ -26,6 +26,36 @@
   </modules>
 
   <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <artifactId>jetty-home</artifactId>
+                  <groupId>org.eclipse.jetty</groupId>
+                  <overWrite>false</overWrite>
+                  <type>zip</type>
+                  <version>${jetty.version}</version>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <id>unpack-jetty-home</id>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.6.0</version>
+      </plugin>
+    </plugins>
     <pluginManagement>
       <plugins>
         <plugin>
