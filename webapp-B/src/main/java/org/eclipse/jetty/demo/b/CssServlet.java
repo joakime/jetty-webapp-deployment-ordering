@@ -1,4 +1,4 @@
-package org.eclipse.jetty.demo;
+package org.eclipse.jetty.demo.b;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -11,20 +11,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class CssServlet extends HttpServlet
 {
+    private static final Logger LOG = LoggerFactory.getLogger(CssServlet.class);
+
     private byte[] rawCss;
 
     @Override
     public void init() throws ServletException
     {
-        System.err.println("## Init (in WebApp B)");
+        LOG.debug("Init (in WebApp B)");
         String cssURLRoot = getInitParameter("cssURLRoot");
         if (cssURLRoot == null)
             throw new IllegalStateException("Unable to find 'cssURLRoot' init-param");
-        System.err.println("## cssURLRoot is " + cssURLRoot);
+        LOG.debug("init-param[cssURLRoot] = {}", cssURLRoot);
         URI uriCss = URI.create(cssURLRoot).resolve("main.css");
-        System.err.println("## uriCss is " + uriCss);
+        LOG.debug("uriCss is {}", uriCss);
 
         // Fetch CSS details from WebApp A
         try
@@ -44,7 +49,7 @@ public class CssServlet extends HttpServlet
                 }
                 rawCss = out.toByteArray();
             }
-            System.err.printf("### Got rawCss of size %d%n", rawCss.length);
+            LOG.info("GET of rawCss from {} complete: size {}", uriCss, rawCss.length);
         }
         catch (IOException e)
         {

@@ -4,4 +4,8 @@
 <Configure class="org.eclipse.jetty.webapp.WebAppContext" id="webappA">
   <Set name="war"><Property name="jetty.base"/>/webapps-late/webapp-A.war</Set>
   <Set name="contextPath">/appA</Set>
+  <!-- add active logging impls to webapp too -->
+  <Set name="extraClasspath">
+    <Property name="jetty.home"/>/lib/logging/*
+  </Set>
 </Configure>

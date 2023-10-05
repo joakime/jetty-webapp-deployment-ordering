@@ -9,7 +9,7 @@
 
   <servlet>
     <servlet-name>CssServlet</servlet-name>
-    <servlet-class>org.eclipse.jetty.demo.CssServlet</servlet-class>
+    <servlet-class>org.eclipse.jetty.demo.b.CssServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
     <init-param>
       <param-name>cssURLRoot</param-name>

@@ -9,7 +9,7 @@
 
   <filter>
     <filter-name>debug</filter-name>
-    <filter-class>org.eclipse.jetty.demo.appa.DebugFilter</filter-class>
+    <filter-class>org.eclipse.jetty.demo.a.DebugFilter</filter-class>
   </filter>
 
   <filter-mapping>
