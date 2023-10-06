@@ -14,7 +14,7 @@ webapps-late/
 # maven://org.eclipse.jetty/jetty-late-deploy/${jetty.version}|lib/jetty-late-deploy-${jetty.version}.jar
 
 [lib]
-lib/jetty-late-deploy-1.0-SNAPSHOT.jar
+lib/jetty-late-deploy-10.0.15.jar
 
 [xml]
 etc/jetty-late-deploy.xml
