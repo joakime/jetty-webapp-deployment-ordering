@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -13,6 +11,26 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.demo</groupId>
+      <artifactId>webapp-A</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.demo</groupId>
+      <artifactId>webapp-B</artifactId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-late-deploy</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -21,6 +39,11 @@
         <version>3.6.0</version>
         <executions>
           <execution>
+            <id>copy</id>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <phase>generate-resources</phase>
             <configuration>
               <artifactItems>
                 <artifactItem>
@@ -50,13 +73,13 @@
                 </artifactItem>
               </artifactItems>
             </configuration>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-            <id>copy</id>
-            <phase>generate-resources</phase>
           </execution>
           <execution>
+            <id>unpack-config-deps</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
             <configuration>
               <classifier>config</classifier>
               <excludes>META-INF/**,webapps/**,start.d/**,start.ini</excludes>
@@ -65,35 +88,10 @@
               <includeGroupIds>org.eclipse.jetty</includeGroupIds>
               <outputDirectory>${project.basedir}</outputDirectory>
             </configuration>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <id>unpack-config-deps</id>
-            <phase>generate-resources</phase>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.eclipse.demo</groupId>
-      <artifactId>webapp-A</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.demo</groupId>
-      <artifactId>webapp-B</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency>
-    <dependency>
-      <artifactId>jetty-late-deploy</artifactId>
-      <groupId>org.eclipse.jetty</groupId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
 
 </project>
