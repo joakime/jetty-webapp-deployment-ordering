@@ -41,21 +41,19 @@ public class LateDeployProvider extends AbstractLifeCycle implements AppProvider
         try
         {
             List<Path> deployables = findDeployables(scanDir);
-            if (LOG.isDebugEnabled())
+            for (Path path : deployables)
             {
-                for (Path path : deployables)
-                {
+                if (LOG.isDebugEnabled())
                     LOG.debug("  Deployables: {}", path);
 
-                    if (FileID.isExtension(path, "xml", "war"))
-                    {
-                        App app = new App(this.deploymentManager, this, path.toString());
-                        this.deploymentManager.addApp(app);
-                    }
-                    else
-                    {
-                        LOG.info("Ignoring unrecognized deployable file: {}", path);
-                    }
+                if (FileID.isExtension(path, "xml", "war"))
+                {
+                    App app = new App(this.deploymentManager, this, path.toString());
+                    this.deploymentManager.addApp(app);
+                }
+                else
+                {
+                    LOG.info("Ignoring unrecognized deployable file: {}", path);
                 }
             }
             LOG.info("Late Deploy Complete");
