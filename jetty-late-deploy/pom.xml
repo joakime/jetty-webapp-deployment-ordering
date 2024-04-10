@@ -10,8 +10,8 @@
 
   <groupId>org.eclipse.jetty</groupId>
   <artifactId>jetty-late-deploy</artifactId>
-
   <version>${jetty.version}</version>
+
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
